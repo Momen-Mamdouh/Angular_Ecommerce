@@ -1,0 +1,19 @@
+
+<div class="home-slider w-full  overflow-hidden ">
+
+    <swiper-container class="mySwiper w-full h-full" [loop]="true"  slides-per-view="3"
+    grid-rows="1"   space-between="0"
+     autoplay-delay="2000" autoplay-disable-on-interaction="false">
+
+    @for (swiperiImage of swiperImagesData; track $index) {
+        <swiper-slide>
+            <div class="w-full h-full">
+                <img class=" object-cover" [srcset]="swiperiImage.homeSliderImageSrc" alt="Fashion">
+            </div>
+        </swiper-slide>
+    }
+        
+    
+    </swiper-container>
+
+</div>

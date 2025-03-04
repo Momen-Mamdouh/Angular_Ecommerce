@@ -1,0 +1,132 @@
+
+<div class="grid grid-cols-7 min-h-screen  ">
+
+    <div class="register-image col-span-4 overflow-hidden ">
+        <app-form-image [formImageSrc]="registerImageSrc" [formImageAlt]="registerImageAlt"></app-form-image>
+
+    </div>
+    
+    <form [formGroup]="registerForm" class="content-center register-form col-span-3 p-16  form-bg " (ngSubmit)="onSubmit()">
+           
+           <div class="form-heading pb-5">
+                <app-form-heading [headingText]="registerHeading" [subHeadingText]="registerSubHeading" [notLogin]="hasBackBtn"></app-form-heading>
+           </div>
+
+            <div  class="name-input pb-3">
+                @let name = registerForm.get('name');
+                <label for="first_name" class="main-auth-label">Name</label>
+                <input formControlName="name" type="text" id="first_name" class="main-input main-auth-input w-full" placeholder="Mo'men" required autocomplete="true"/>
+            </div>
+
+           @if (name?.touched && name?.errors) {
+                @if (name?.getError('required')) {
+                    <div class="nameWarning p-4  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  Name is required.
+                    </div>
+                }
+                @else if (name?.getError('pattern')) {
+                    <div class="nameWarning p-4  text-sm text-red-900 rounded-lg bg-yellow-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  Name must start with Capital Letter & min length 3 Charcs.
+                    </div>
+                }
+               
+           } 
+
+            <div  class="email-input pb-3">
+                @let email = registerForm.get('email');
+                <label for="email_address" class="main-auth-label">Email</label>
+                <input formControlName="email"type="email" id="email_address" class="main-input main-auth-input w-full" placeholder="momenmamdouhw@gmail.com" required autocomplete="true"/>
+                
+            </div>
+
+            @if (email?.touched && email?.errors) {
+                @if (email?.getError('required')) {
+                    <div class="emailWarning p-4  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  Email is required.
+                    </div>
+                }
+                @else if (email?.getError('pattern')) {
+                    <div class="emailWarning p-4  text-sm text-red-900 rounded-lg bg-yellow-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  Ensure it follow email rules.
+                    </div>
+                }
+               
+           }
+
+            <div   class="password-input pb-3">
+                @let password = registerForm.get('password');
+                <label for="password" class="main-auth-label">Password</label>
+                <input formControlName="password" type="password" id="password" class="main-input main-auth-input w-full" placeholder="************" required />
+            </div>
+
+            @if (password?.touched && password?.errors) {
+                @if (password?.getError('required')) {
+                    <div class="passwordWarning p-4  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  Password is required.
+                    </div>
+                }
+                @else if (password?.getError('pattern')) {
+                    <div class="passwordWarning p-4  text-sm text-red-900 rounded-lg bg-yellow-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  At Least 8 Charcs.
+                    </div>
+                }
+               
+           }
+
+            <div  class="repassword-input pb-3">
+                @let rePassword = registerForm.get('rePassword');
+
+                <label for="repassword" class="main-auth-label">rePassword</label>
+                <input formControlName="rePassword" type="password" id="repassword" class="main-input main-auth-input w-full" placeholder="************" required />
+            </div>
+            @if (registerForm.getError('mismatch') && rePassword?.touched) {
+                <div class="rePasswordWarning p-4  text-sm text-red-900 rounded-lg bg-yellow-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                    <span class="font-medium">Warning alert!</span>  It must match the password written !!!
+                </div>   
+              
+           }
+
+
+            <div  class="phone-input pb-3">
+                @let phone = registerForm.get('phone');
+                <label for="phone" class="main-auth-label">Phone Number</label>
+                <input formControlName="phone" type="tel" id="phone" class="main-input main-auth-input w-full" placeholder="01xxxxxxxxx" required autocomplete="true"/>
+            </div>
+
+        @if (phone?.touched && phone?.errors) {
+            @if (phone?.getError('required')) {
+                <div class="nameWarning p-4  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                    <span class="font-medium">Warning alert!</span>  Name is required.
+                </div>
+            }
+            @else if (phone?.getError('pattern')) {
+                <div class="nameWarning p-4  text-sm text-red-900 rounded-lg bg-yellow-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                    <span class="font-medium">Warning alert!</span>  Egypation phones ONLY.
+                </div>
+            }
+           
+       }
+
+            <div class="terms-and-conditions flex items-start mt-3 mb-6">
+                <div class="flex items-center h-5">
+                    <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-blue-700 rounded-sm bg-blue-100 focus:ring-3 focus:ring-blue-900 
+                    dark:bg-gray-600 dark:border-gray-600 dark:focus:ring-gray-800 dark:ring-offset-gray-800" required />
+                </div>
+                <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">I agree with the <a href="#" class="text-blue-600 
+                    hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+            </div>
+
+            @if (errorMessage) {
+                <button routerLink="/forgetPassword" type="button" class="my-3 main-auth-btn w-full"> Forget Password </button>
+            }
+            <app-form-btn [isLoading]="isLoading" [errorMessage]="errorMessage" [btnText]="buttonText" [form]="registerForm"></app-form-btn>
+           
+    </form>
+            
+</div>  
+
+
+@if (isLoading) {
+    <app-loader></app-loader>
+}
+

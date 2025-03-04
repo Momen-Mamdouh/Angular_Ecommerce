@@ -1,0 +1,13 @@
+
+<div class="grid grid-cols-7 h-screen overflow-hidden bg-slate-950">
+    <!-- Image Section -->
+    <div class="notFound-image col-span-4 flex justify-center items-center">
+        <img class="object-contain max-w-full max-h-full" src="/Images/notFound.jpg" alt="">
+    </div>
+
+    <!-- Form Section -->
+    <div class="goHome flex  justify-between items-center p-2   col-span-3  h-[80%] overflow-y-auto">
+       <a routerLink="/home" class="primary-btn w-full mx-5 hover:bg-blue-800"> Go Home</a>
+       <button (click)="logOut()" class="primary-btn w-full mx-5 hover:bg-red-800"> Log Out </button>
+    </div>
+</div>

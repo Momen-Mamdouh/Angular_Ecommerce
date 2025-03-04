@@ -1,0 +1,72 @@
+<div class="grid grid-cols-7 min-h-screen  ">
+    <div class="form-image col-span-4 overflow-hidden ">
+        <app-form-image [formImageSrc]="verifyResetCodeImageSrc"
+            [formImageAlt]="verifyResetCodeImageAlt"></app-form-image>
+    </div>
+
+    <form [formGroup]="checkOtpForm" class="content-center fporgetPassword-form col-span-3 p-16 form-bg "
+        (ngSubmit)="onSubmit()">
+
+    
+        <div class="form-heading pb-5">
+            <app-form-heading [headingText]="checkOTPHeading" [subHeadingText]="checkOTPSubHeading" [notLogin]="hasBackBtn"></app-form-heading>
+        </div>
+
+        <div class="numbers-inputs flex  justify-center gap-5 py-10">
+
+            <div class="firstNumber-input main-numberInput">
+                <input formControlName="firstNumber" class="main-input" type="number" placeholder="0" id="number-input"
+                    aria-describedby="helper-text-explanation"
+                    class="main-input main-auth-input p-2.5 w-full"
+                    placeholder="90210" required />
+            </div>
+
+            <div class="secondNumber-input main-numberInput">
+                <input formControlName="secondNumber" class="main-input" type="number" placeholder="0" id="number-input"
+                    aria-describedby="helper-text-explanation"
+                    class="main-input main-auth-input p-2.5 w-full"
+                    placeholder="90210" required />
+            </div>
+
+            <div class="thirdNumber-input main-numberInput">
+                <input formControlName="thirdNumber" class="main-input" type="number" placeholder="0" id="number-input"
+                    aria-describedby="helper-text-explanation"
+                    class="main-input main-auth-input p-2.5 w-full"
+                    placeholder="90210" required />
+            </div>
+
+            <div class="fourthNumber-input main-numberInput">
+                <input formControlName="fourthNumber" class="main-input" type="number" placeholder="0" id="number-input"
+                    aria-describedby="helper-text-explanation"
+                    class="main-input main-auth-input p-2.5 w-full"
+                    placeholder="90210" required />
+            </div>
+
+            <div class="fifthNumber-input main-numberInput">
+                <input formControlName="fifthNumber" class="main-input" type="number" placeholder="0" id="number-input"
+                    aria-describedby="helper-text-explanation"
+                    class="main-input main-auth-input p-2.5 w-full"
+                    placeholder="90210" required />
+            </div>
+
+            <div class="sixthNumber-input main-numberInput">
+                <input formControlName="sixthNumber" class="main-input" type="number" placeholder="0" id="number-input"
+                    aria-describedby="helper-text-explanation"
+                    class="main-input main-auth-input p-2.5 w-full"
+                    placeholder="90210" required />
+            </div>
+
+        </div>
+
+
+        <app-form-btn [isLoading]="isLoading" [errorMessage]="errorMessage" [btnText]="buttonText" [form]="checkOtpForm"></app-form-btn>
+
+    </form>
+
+</div>
+
+
+@if (vaildOTP) {
+    <app-form-modal [headingText]="modalHeading" [subHeadingText]="modalSubHeading" 
+    [roterLink]="modalRouterLink" [buttonText]="modalButtonText" ></app-form-modal>
+}

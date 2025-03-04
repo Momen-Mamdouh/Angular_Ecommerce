@@ -1,0 +1,10 @@
+:host{
+    display: flex;
+    justify-content: space-between;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+// :host{
+//     @apply bg-white dark:bg-gray-800 
+// }

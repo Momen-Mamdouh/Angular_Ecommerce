@@ -1,0 +1,5 @@
+@use "../variables" as Var;
+
+html{
+    background-color: Var.$bg-white;
+}

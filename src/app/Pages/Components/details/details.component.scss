@@ -1,0 +1,19 @@
+.product-image, .productSubImage{
+   &:hover{
+        .productImage-layer{
+            transform: translateY(0);
+            -webkit-transform: translateY(0);
+            -moz-transform: translateY(0);
+            -ms-transform: translateY(0);
+            -o-transform: translateY(0);
+}
+    }
+}
+
+.productImage-layer{
+    transform: translateY(120%);
+    -webkit-transform: translateY(120%);
+    -moz-transform: translateY(120%);
+    -ms-transform: translateY(120%);
+    -o-transform: translateY(120%);
+}

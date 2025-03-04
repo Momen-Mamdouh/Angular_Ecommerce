@@ -1,0 +1,40 @@
+<div class="container brands">
+    <h1 class="pt-12 container text-2xl font-bold"> Our Brands:</h1>
+
+    <div class="search-input-container my-10 sm:mx-auto sm:w-1/2 md:w-1/4  md:mx-0">
+        <label for="search" class="main-text-color mb-2 text-sm font-medium  sr-only ">Search</label>
+        <div class="relative search-input">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <i class="w-4 text-gray-500 dark:text-gray-400"> <i class="fas fa-search"></i> </i>
+            </div>
+            <input type="search" id="search"
+                class="main-text-color text-base block w-full main-input"
+                placeholder="Search" required [(ngModel)]="searchItem" />
+        </div>
+    </div>
+
+    <div class="brands-grid grid grid-cols-4 py-12 gap-10" >
+    
+        @for (brand of allBrandsData | brandsSearch : searchItem.toUpperCase()  ; track brand._id) {
+            <div class="card main-card ">
+    
+                <div class="card-img" [routerLink]="['/details', brand._id ]">
+                        <img class="main-card-img" [srcset]="brand.image"
+                            [alt]="brand.name" />
+                </div>
+    
+                <div class="card-header ps-2 pe-1 pb-5" [routerLink]="['/details', brand._id ]">
+          
+                        <h3 class="text-xl font-medium main-card-header-text ">
+                            {{brand.name}} </h3>
+     
+                </div>
+    
+          
+                
+            </div>
+        }
+    </div>
+    
+</div>
+

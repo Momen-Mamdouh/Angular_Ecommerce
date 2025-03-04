@@ -1,0 +1,94 @@
+<div class="container my-16 shopping grid grid-cols-12 gap-6">
+    <!-- Checkout Form Section -->
+    <div class="checkOutForm col-span-7 md:col-span-8 sm:col-span-12">
+      <form [formGroup]="checkoutForm" 
+            class="content-center login-form p-8 pt-0 ps-0 w-full" 
+            (ngSubmit)="onCheckOut()">
+        
+        <!-- Payment Step Icons -->
+        <div class="form-heading pb-5">
+          <app-form-heading [headingText]="paymentHeadingText" 
+                            [subHeadingText]="paymentSubHeadingText" 
+                            [notLogin]="hasBackBtn">
+          </app-form-heading>
+  
+          <div class="paymentIcons flex items-center md:justify-between sm:justify-center ">
+            <!-- Step 1: Home Address Icon -->
+            <div class="relative flex flex-col items-center">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-black text-white">
+                <fa-icon [icon]="homeIcon"></fa-icon>
+              </div>
+              <span class="mt-2 text-sm">Address</span>
+              <!-- Dashed Line -->
+              <div class="absolute top-5 left-full w-[400%] border-t-2 border-dashed border-gray-300 sm:hidden md:visible"></div>
+            </div>
+          
+            <!-- Step 2: Credit Card Icon -->
+            <div class="relative flex flex-col items-center">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-200 text-black">
+                <fa-icon [icon]="creditCardIocn"></fa-icon>
+              </div>
+              <span class="mt-2 text-sm">Payment Method</span>
+              <!-- Dashed Line -->
+              <div class="absolute top-5 left-[70%] w-[150%] border-t-2 border-dashed border-gray-300 sm:hidden md:visible"></div>
+            </div>
+          
+            <!-- Step 3: Review Icon -->
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-200 text-black">
+                <fa-icon [icon]="reviewFileIcon"></fa-icon>
+              </div>
+              <span class="mt-2 text-sm">Review</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Input Fields -->
+        <div class="details-input pb-3">
+          <label for="details" class="block mb-2 text-base font-normal">Details</label>
+          <textarea formControlName="details" rows="6" id="details" 
+                    class="main-input w-full" placeholder="Shipment Details..." required>
+          </textarea>
+        </div>
+  
+        <!-- Phone Input -->
+        <div class="phone-input pb-3">
+          <label for="phone" class="block mb-2 text-base font-normal">Phone</label>
+          <input formControlName="phone" type="tel" id="phone" 
+                 class="main-input w-full" placeholder="ex: 01xxxxxxxxx" required />
+        </div>
+  
+        <!-- City Input -->
+        <div class="city-input pb-3">
+          <label for="city" class="block mb-2 text-base font-normal">City</label>
+          <input formControlName="city" type="text" id="city" 
+                 class="main-input w-full" placeholder="Cairo" required />
+        </div>
+  
+        <!-- Checkout Buttons -->
+        <div class="checkOut-btns flex justify-between sm:flex-col sm:gap-4">
+          <app-form-btn (click)="onlinePayment = true" 
+                        [isLoading]="successLoading" 
+                        [errorMessage]="errorMessage" 
+                        [btnText]="onlineButtonText" 
+                        [form]="checkoutForm" 
+                        class="w-full sm:w-auto">
+          </app-form-btn>
+          <app-form-btn (click)="cashPayment = true" 
+                        [isLoading]="successLoading" 
+                        [errorMessage]="errorMessage" 
+                        [btnText]="cashButtonText" 
+                        [form]="checkoutForm" 
+                        class="w-full sm:w-auto">
+          </app-form-btn>
+        </div>
+        
+      </form>
+    </div>
+  
+    <!-- Payment List Section -->
+    <div class="payment-list col-span-5 md:col-span-4 sm:col-span-12 my-40">
+      <app-payment-list [cartData]="cartData" [deliveryCharge]="deliveryCharge"></app-payment-list>
+      <div class="card"></div>
+    </div>
+  </div>

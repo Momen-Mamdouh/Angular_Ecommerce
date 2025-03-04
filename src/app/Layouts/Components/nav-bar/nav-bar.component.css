@@ -1,0 +1,7 @@
+.meagMenu-subLinks {
+  @apply w-full px-4 py-3;
+}
+
+.my-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(234, 179, 8);
+}/*# sourceMappingURL=nav-bar.component.css.map */

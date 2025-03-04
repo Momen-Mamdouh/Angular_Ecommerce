@@ -1,0 +1,26 @@
+.card{
+    button{
+        transform: translateY(100%);
+        -webkit-transform: translateY(100%);
+        -moz-transform: translateY(100%);
+        -ms-transform: translateY(100%);
+        -o-transform: translateY(100%);
+        opacity: 0;
+    }
+
+    &:hover{
+        button{
+            transform: translateY(0);
+            -webkit-transform: translateY(0);
+            -moz-transform: translateY(0);
+            -ms-transform: translateY(0);
+            -o-transform: translateY(0);
+            opacity: 1;
+}
+
+    }
+
+
+}
+
+

@@ -1,0 +1,86 @@
+<div class="grid grid-cols-7 min-h-screen  ">
+
+    <div class="register-image col-span-4 overflow-hidden ">
+        <app-form-image [formImageSrc]="contactUsImageSrc" [formImageAlt]="contactUsImageAlt"></app-form-image>
+
+    </div>
+    
+    <form  [formGroup]="contactUsForm" class="content-center contactUs-form col-span-3 p-16 bg-cyan-500" (ngSubmit)="onSubmit()">
+           
+           <div class="form-heading pb-5">
+                <app-form-heading [headingText]="contactUsHeading" [subHeadingText]="contactUsSubHeading" [notLogin]="hasBackBtn"></app-form-heading>
+           </div>
+
+           <div  class="name-input main-input-padding">
+                @let name = contactUsForm.get('name');
+                <label for="name" class=" main-auth-label">Name:</label>
+                <input formControlName="name"type="text" id="name" class="main-input main-auth-input w-full" placeholder="Mo'men" required autocomplete="true"/>
+                
+            </div>
+
+            @if (name?.touched && name?.errors) {
+                @if (name?.getError('required')) {
+                    <div class="nameWarning p-4 mb-3  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  Name is required.
+                    </div>
+                }
+ 
+             }
+
+            <div  class="email-input main-input-padding">
+                @let email = contactUsForm.get('email');
+                <label for="email" class=" main-auth-label">Email:</label>
+                <input formControlName="email"type="email" id="email" class="main-input main-auth-input w-full" placeholder="momenmamdouhw@gmail.com" required autocomplete="true"/>
+                
+            </div>
+
+            @if (email?.touched && email?.errors) {
+                @if (email?.getError('required')) {
+                    <div class="emailWarning p-4 mb-3  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  Email is required.
+                    </div>
+                }
+                @else if (email?.getError('pattern')) {
+                    <div class="emailWarning p-4 mb-3  text-sm text-red-900 rounded-lg bg-yellow-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  Ensure it follow email rules.
+                    </div>
+                }
+               
+           }
+
+            <div  class="phone-input main-input-padding">
+                @let phone = contactUsForm.get('phone');
+                <label for="phone" class=" main-auth-label">Phone:</label>
+                <input formControlName="phone"type="tel" id="phone" class="main-input main-auth-input w-full" placeholder="01*********" required autocomplete="true"/>
+                
+            </div>
+
+            @if (phone?.touched && phone?.errors) {
+                @if (phone?.getError('required')) {
+                    <div class="phoneWarning p-4 mb-3  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  phone is required.
+                    </div>
+                }
+                @else if (phone?.getError('pattern')) {
+                    <div class="phoneWarning p-4 mb-3  text-sm text-red-900 rounded-lg bg-yellow-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  Ensure it follow phone rules.
+                    </div>
+                }
+            
+            }
+
+            
+
+
+
+            <app-form-btn [isLoading]="successLoading" [errorMessage]="errorMessage" [btnText]="buttonText" [form]="contactUsForm"></app-form-btn>
+
+
+    </form>
+
+</div>  
+
+@if ( showModal) {
+    <app-form-modal [headingText]="modalHeading" [subHeadingText]="modalSubHeading" 
+    [roterLink]="modalRouterLink" [buttonText]="modalButtonText"></app-form-modal>
+}

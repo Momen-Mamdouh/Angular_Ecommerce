@@ -1,0 +1,28 @@
+<div class="flex flex-col items-center justify-center   bg-gray-50 ">
+    <div class="bg-white rounded-lg shadow-md w-full max-w-2xl text-center">
+
+        <div class="cart-img ">
+            <img [srcset]="emptyImageSrc()" [alt]="emptyImageAlt()" class="mb-6" />
+        </div>
+
+        <div class="cart-heading p-8">
+            <h2 class=" text-lg font-semibold text-gray-900">{{emptyHeading()}}</h2>
+    
+            <!-- Description -->
+            <p class="text-gray-700 text-base mt-2">
+                    {{emptyParagraph()}}
+            </p>
+        
+        </div>
+
+        <div class="cart-footer p-8">
+                <button
+                    routerLink="/shop/mainShop"
+                    class="w-1/2 primary-btn px-16"
+                >
+                    To Shop
+                </button>
+        </div>
+
+    </div>
+</div>  

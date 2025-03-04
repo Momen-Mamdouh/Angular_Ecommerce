@@ -1,0 +1,11 @@
+<div class="container py-16">
+    <app-categories-slider></app-categories-slider>
+    @if (activeRoute == 'mainShop') {
+        <app-products [startSlicing]= "0" [endSlicing]="-1"></app-products>
+    }
+    @else{
+        <app-products></app-products>
+    }
+    
+    
+</div>

@@ -1,0 +1,128 @@
+<div class="grid grid-cols-12 min-h-screen ">
+    
+  <div class="profileData col-span-12  ">
+    <div class="profileData-btns flex justify-between items-center mt-6">
+        <div class="profileImage ms-10 relative">
+            @if(profileImage() != ''){
+                <img  class="size-24 rounded-full" [srcset]="profileImage()" alt="Profile Image">
+            }
+
+            <i (click)="triggerFileInput()" title="Select an Image to upload" class="fas fa-pen-to-square absolute top-0 start-16 bg-white p-2 rounded-full black-color " > <input #fileInput class="hidden"  type="file" accept="image/*" (change)="onFileSelected($event)"></i>
+        </div>
+        @if(addressesData().length !=0 ){
+            <div class="profileBtn">
+                <button class="primary-btn" type="button" (click)="editAdresses()"> <i class="fas fa-pen-to-square"></i>  Add Profile</button>
+            </div>
+        }
+    </div>
+  </div>
+  
+    @if( addressesData().length == 0 || editAdressesValue){
+        <form [formGroup]="adressessForm" class="content-center adressess-form col-span-12 p-16  " (ngSubmit)="addAddressesData()">
+           
+            <div class="form-heading pb-5">
+                 <app-form-heading [headingText]="adressessHeading" [subHeadingText]="adressessSubHeading" [notLogin]="hasBackBtn"></app-form-heading>
+            </div>
+    
+             <div  class="name-input pb-3">
+                 @let name = adressessForm.get('name');
+                 <label for="adressess_name" class="main-auth-label">Address Name:</label>
+                 <input formControlName="name" type="text" id="adressess_name" class="main-input main-auth-input w-full" placeholder="Maddi" required autocomplete="true"/>
+             </div>
+    
+            @if (name?.touched && name?.errors) {
+                 @if (name?.getError('required')) {
+                     <div class="nameWarning p-4  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                         <span class="font-medium">Warning alert!</span>  Name is required.
+                     </div>
+                 }    
+            } 
+    
+             <div  class="details-input pb-3">
+                 @let details = adressessForm.get('details');
+                 <label for="details_address" class="main-auth-label">Details:</label>
+                 <textarea formControlName="details" type="text" id="details_address" class="main-input main-auth-input w-full" placeholder="Adresses Details ..." required autocomplete="true"></textarea>
+                 
+             </div>
+    
+             @if (details?.touched && details?.errors) {
+                 @if (details?.getError('required')) {
+                     <div class="detailsWarning p-4  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                         <span class="font-medium">Warning alert!</span>  Details is required.
+                     </div>
+                 }
+    
+                
+            }
+    
+             <div   class="phone-input pb-3">
+                 @let phone = adressessForm.get('phone');
+                 <label for="phone" class="main-auth-label">phone:</label>
+                 <input formControlName="phone" type="tel" id="phone" class="main-input main-auth-input w-full" placeholder="01*********" required />
+             </div>
+    
+             @if (phone?.touched && phone?.errors) {
+                 @if (phone?.getError('required')) {
+                     <div class="phoneWarning p-4  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                         <span class="font-medium">Warning alert!</span>  Phone is required.
+                     </div>
+                 }
+                 @else if (phone?.getError('pattern')) {
+                     <div class="phoneWarning p-4  text-sm text-red-900 rounded-lg bg-yellow-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                         <span class="font-medium">Warning alert!</span>  Egypation Phone Only !!!
+                     </div>
+                 }
+                
+            }
+    
+             <div  class="city-input pb-3">
+                 @let city = adressessForm.get('city');
+    
+                 <label for="city" class="main-auth-label">City:</label>
+                 <input formControlName="city" type="text" id="city" class="main-input main-auth-input w-full" placeholder="Egypation City" required />
+             </div>
+             @if (city?.touched && city?.errors) {
+                @if (city?.getError('required')) {
+                    <div class="cityWarning p-4 mb-10  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                        <span class="font-medium">Warning alert!</span>  City is required.
+                    </div>
+                }
+            }
+       
+            <div class="w-1/2 ">
+                <app-form-btn [isLoading]="isLoading" [errorMessage]="errorMessage" [btnText]="buttonText" [form]="adressessForm"></app-form-btn>
+             
+            </div>
+
+            @if (showPopUpAlert) {
+                <div class="detailsWarning p-4 mt-5  text-sm text-red-900 rounded-lg bg-red-300 dark:bg-gray-800 dark:text-red-300" role="alert">
+                    <span class="font-medium">Warning alert!</span>  This Phone is already Assigned.
+                </div>
+            }
+        </form>
+    }
+    @if(!editAdressesValue){
+       
+            @if (addressesData().length !=0) {
+                @for (addresses of addressesData(); track $index) {    
+                    <div class="col-span-6">   
+                        <a  class="w-full  relative flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                
+                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" [srcset]="profileImage()" alt="Mo'men Mamdouh profile">
+                                <div class="flex flex-col justify-between px-4  leading-normal">
+                                    <h5 class="addressCard-heading">Address: <span class=" addressCard-subHeading"> {{addresses.name}} </span> </h5>
+                                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">  <span class="addressCard-heading">Address Details:</span> {{addresses.details}} </p>
+                                    <h5 class="addressCard-heading"> Phone Number: <span class=" addressCard-subHeading">{{addresses.phone}}</span> </h5>
+                                    <h5 class="addressCard-heading">City: <span class=" addressCard-subHeading">{{addresses.city}}</span></h5>
+                                    <button (click)="removeAddress(addresses._id)" type="button" class="mt-5 primary-btn hover:bg-red-600"> Remove Profile </button>
+                                </div>    
+                        </a>
+                    </div>
+                }
+            }
+        
+
+        
+    }
+
+</div>

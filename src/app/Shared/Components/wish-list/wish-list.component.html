@@ -1,0 +1,70 @@
+<div class="container mx-16 mb-16">
+    <h1 class="main-heading-styles hover:text-red-600 duration-500 mb-5">My WishList :</h1>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3  gap-10 sm:justify-center" >
+        @for (product of wishListData(); track product._id) {
+            <div class="card main-card ">
+                <div class="flex flex-row justify-between">
+
+                    <div class="card-img w-1/2" [routerLink]="['/details', product._id ]">
+                            <img class="main-card-img " [srcset]="product.imageCover"
+                                [alt]="product.title" />
+                    </div>
+        
+                    <div class="card-header pb-5 flex items-center justify-between flex-col text-center" [routerLink]="['/details', product._id ]">
+                            <h5 class="text-base font-semibold main-card-header-text">
+                                {{product.category.name}} </h5>
+
+                            <h3 class="text-base font-medium main-card-header-text ">
+                                {{product.title.split(' ', 2).join(' ')}} 
+                            </h3>
+                            <div class="flex items-center gap-3">
+                                <span class="  text-start text-xl font-bold hover:text-yellow-500 duration-500 main-text-color    "> {{product.price | currency:'GBP'}}  </span>   
+                                <i  class="fas fa-heart text-base text-red-500 "></i>
+                            </div>
+                    </div>
+          
+    
+                
+                    <button (click)="addToCart(product._id)" class="w-1/6 primary-btn">Add to cart</button>
+
+                </div>
+                <button (click)="removeProductFromWishList(product._id)" class="w-full main-btn-style main-btn-text-color bg-red-700 hover:bg-red-900 main-duration focus:ring-0">Remove from WishList</button>
+                
+    
+            </div>
+        }
+    </div>
+</div>
+
+<!-- <div class="card main-card">
+    <a href="#" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="card-img" [routerLink]="['/details', product._id ]">
+                <img class="main-card-img" [srcset]="product.imageCover"
+                    [alt]="product.title" />
+            </div>
+
+            <div class="flex flex-col justify-between p-4 leading-normal">
+                <div class="card-header ps-2 pe-1 pb-5" [routerLink]="['/details', product._id ]">
+                    <h5 class="text-md font-semibold main-card-header-text">
+                        {{product.category.name}} </h5>
+                    <h3 class="text-xl font-medium main-card-header-text ">
+                        {{product.title.split(' ', 2).join(' ')}} </h3>
+                <div class="card-body flex items-center justify-between  mt-2.5 mb-5">
+
+                    <div class="flex items-center  space-x-1 rtl:space-x-reverse">
+                        <i class="w-4 h-4 text-yellow-400"> <i class="fas fa-star"></i> </i>
+                        <i class="w-4 h-4 text-gray-200 dark:white-color"><i class="fas fa-star-half-empty"></i> </i>
+                        <span class="text-xs font-semibold px-2.5 py-0.5 ms-3 rounded-sm main-text-color bg-yellow-400">
+                            {{product.ratingsAverage}} </span>
+                    </div>
+
+                    <span class="text-3xl font-bold main-text-color"> {{product.price | currency:'GBP'}}  </span>
+                </div>
+
+
+            </div>
+            </div>
+            <button (click)="addToCart(product._id)" class="w-full  primary-btn">Add to cart</button>
+    </a>
+</div> -->
+<!-- object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg -->

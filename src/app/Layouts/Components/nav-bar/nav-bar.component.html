@@ -1,0 +1,224 @@
+<nav class="white-bg border-gray-color dark:black-bg fixed top-0 end-0  start-0 z-50 ">
+    <div class="max-w-screen-2xl flex md:flex-wrap sm:flex-nowrap items-center justify-between mx-auto p-4">
+        <a routerLink="/home" class="flex items-center space-x-3 rtl:space-x-reverse md:px-10">
+            <img [srcset]="environmentData.lightLogoNavbar"  class="md:ps-20 sm:ps-0 h-10" [alt]="environmentData.logoAlt" />
+        </a>
+
+       
+
+        <div class="icons-list flex md:order-2 items-center space-x-3 md:space-x-0 rtl:space-x-reverse md:px-20 z-50">  
+            <div class="flex mt-4 md:pe-5 sm:pe-0 sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse">
+                    @for (icon of iconsData; track $index) {
+                        @if (icon.iconInTag == 'Shopping Cart') {
+                                <div class="relative group ">
+                                    <button (click)="toggleMenu('CartMenu')"  class="cursor-pointer black-color dark:white-color main-duration"  [class]="icon.iconHoverClass">
+                                        <i class="w-4 h-4 text-xl"><fa-icon [icon]="icon.icon"></fa-icon></i>
+                                        <span class="sr-only"> {{icon.iconInTag}} </span>
+                                        <span class="absolute -top-3 -right-3 bg-yellow-500 text-white text-center rounded-full w-6 h-6"> {{numberOfCartItems()}} </span>
+                                    </button>
+                                 
+                                  @if (showCartMenu) {
+                                    <!-- ^ =====================================CartMenu===================================== -->
+                                    <div class="absolute md:right-0 mt-2 w-80 bg-white shadow-lg rounded sm:end-10 overflow-auto max-h-96 my-scrollbar ">
+                                        <p class="p-5">You've {{cartProducts().length}} Products in your Cart</p>
+                                        <ul class="">
+                                           @for (cartProduct of cartProducts(); track $index) {
+                                                <li class=" border-b-2 rounded border-b-gray-200 py-4">    
+                                                    <div class="cart-item flex gap-y-3">
+                                                        <picture class="w-1/2 px-5">
+                                                            <img [srcset]="cartProduct.product.imageCover" [alt]="cartProduct.product.title">
+                                                        </picture>
+                                                        <div class="item-details flex gap-y-3 flex-col justify-between w-full">
+                                                                <h5 > {{cartProduct.product.title}} </h5>
+                                                                <span class="font-bold"> {{cartProduct.count}} x  {{cartProduct.price | currency: '£'}} </span>
+                                                                <div class="item-add flex justify-between">
+                                                                    <span >{{cartProduct.product.brand.name}} </span>
+                                                                    <i  (click)="removeSpecficProduct(cartProduct.product.id)" (click)="getLoggedUserCartData()" class="text-xl cursor-pointer pe-4 text-red-700 hover:text-red-500 duration-500"> 
+                                                                        <fa-icon [icon]="deleteIcon"></fa-icon> </i>
+                                                                </div>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                           }
+                                        </ul>
+                                        @if (cartProducts().length != 0) {
+                                            <div class="totalPrice flex justify-between p-5">
+                                                <span>SubTotal:</span>
+                                                <span>{{cartData.totalCartPrice  | currency: '£'}} </span>
+                                            </div>
+                                        }
+
+                                       
+                                        <div class="products-btn  flex flex-col gap-y-3 p-3">
+                                            @if (cartProducts().length != 0) {
+                                                <button routerLink="/cart" class="primary-btn"> View Cart </button>
+                                                <button type="submit" class="checkOutBtn primary-btn" [routerLink]="['/checkOut', cartData._id]"> CheckOut </button>
+                                            }
+                                            @else {
+                                                <button routerLink="/shop/mainShop" class="primary-btn"> To Shop </button>
+                                            }
+                                    
+
+                                        </div>
+                                        
+                                    </div>
+                                  }
+                                  
+                                </div>
+                            
+                            }
+                        @else if(icon.iconInTag == 'Heart Like'){
+                            <div class="relative group ">
+                                <a routerLink="/profile/wishlist"  class="black-color dark:white-color main-duration" [class]="icon.iconHoverClass">
+                                    <i class="w-4 h-4 text-xl"> <fa-icon  [icon]="icon.icon"></fa-icon> </i>
+                                    <span class="sr-only"> {{icon.iconInTag}} </span>
+                                    <span class="absolute -top-3 -right-3 bg-red-600 text-white text-center rounded-full w-6 h-6"> {{numberOfWishListItems()}} </span>
+
+                                </a>
+                            </div>
+                        }
+                     
+                            
+                            }
+
+                       
+                   
+            </div>
+
+                <div class="applying-buttons">
+                  
+
+
+                    @if(!isLogin){
+                        <button routerLink="/register" type="button"
+                            class="me-2 main-btn">Register
+                         </button>
+
+                        <button routerLink="/login" type="button"
+                            class=" main-btn">Login
+                        </button>
+                    }
+                    @else {
+                        <button type="button"
+                            class="main-btn" (click)="logOut()">Logout 
+                        </button>
+                    }
+                </div>
+
+           
+           
+            <button data-collapse-toggle="navbar-cta" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm gray-color rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:gray-color  main-duration"
+                aria-controls="navbar-cta" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            
+        </div>
+
+        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+            <ul class="flex flex-col items-center font-medium p-4 md:p-0 mt-4 border  rounded-lg md:space-x-8 rtl:space-x-reverse 
+            md:flex-row md:mt-0 md:border-0">
+
+                <li>
+                    <a routerLink="/home" routerLinkActive="activeLink"
+                        class="navbar-anchors"
+                        aria-current="page">Home</a>
+                </li>
+               
+                <li > 
+              
+                    <button (click)="toggleMenu('MegaMenu')" id="mega-menu-dropdown-button" 
+                          routerLinkActive="activeLink" 
+                        class="flex items-center justify-between w-full py-2 px-3 font-medium 
+                        text-dark  md:w-auto  black-color hover:gray-color dark:white-color dark:hover:white-color
+                          main-duration ">
+                            Shop <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+
+                    @if(showMegaMenu){
+                      
+                            <div #MegaMenu  id="mega-menu-dropdown" class="content-center start-1/2 -translate-x-1/2 items-center absolute z-10  grid  w-auto grid-cols-2 text-sm 
+                            bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700 
+                            md:grid-cols-4 dark:bg-gray-700 " [style..transform]="'translate3d(120.8px, 58.4px, 0px)'">
+
+                                    @for (menuData of meagMenuData; track $index) {
+                                        <div [class] = "menuData.menuName" class="menMenu border-e-2 p-2 pb-20 px-10  light-color md:pb-4 dark:gray-color">
+                                            <ul class="space-y-5 w-60" aria-labelledby="mega-menu-dropdown-button">
+                
+                                                <li [class]="menuData.subMenuName">
+                                                    <a [routerLink]="menuData.routerLink" class="black-color dark:gray-color hover:dark:white-color hover:gray-color main-duration">
+                                                        {{menuData.itemsName}}
+                                                    </a>
+                
+                                                    <ul [class]="menuData.subItemsName" class="menSubItems  text-sm font-medium gray-color   dark:light-color">
+                                                        @for (subMenuItem of menuData.itemsNames; track $index) {
+                                                            <li  class="meagMenu-subLinks rounded-t " >
+                                                                <a [routerLink]="subMenuItem.routerLink" class="hover:dark:white-color main-duration"> {{subMenuItem.itemName}} </a>
+                                                            </li>
+                                                        }
+                                                        
+                                                    </ul>
+                
+                
+                                                </li>
+                
+                                                <li [class]="menuData.subItemName">
+                                                    <a routerLink="123" class="black-color dark:gray-color hover:dark:white-color hover:gray-color main-duration">
+                                                        {{menuData.subItemAnchorName}}
+                                                    </a>
+                
+                                                    <ul class="text-sm font-medium gray-color   dark:light-color">
+                
+                                                        @if (meagMenuData.length -1 != $index) {
+                                                            @for (subSubItem of menuData.subItemsNames; track $index) {
+                                                                <li class="meagMenu-subLinks rounded-b ">
+                                                                    <a [routerLink]="subSubItem.routerLink" class="hover:dark:white-color main-duration" > {{subSubItem.itemName}} </a>
+                                                                </li>
+                                                            }
+                                                        }
+                                        
+                                                    </ul>
+                
+                
+                                                </li>
+                                                
+                                            
+                                            </ul>
+                
+                                        </div>
+                                    }
+                            
+                            </div>
+                 
+                    }
+                </li>
+                
+
+                <li>
+                    <a routerLink="/brands" routerLinkActive="activeLink"
+                        class="navbar-anchors"
+                        aria-current="page">Brands</a>
+                </li>
+
+                
+                <li>
+                    <a routerLink="/contactUs" routerLinkActive="activeLink"
+                        class="navbar-anchors"
+                        aria-current="page">Contact Us</a>
+                </li>
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="afterNabBar mt-16"></div>

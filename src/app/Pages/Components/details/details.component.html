@@ -1,0 +1,130 @@
+
+<div class="container py-16">
+
+  @if (dataBrandName) {
+    <div class="product-details md:gap-8 md:grid md:grid-cols-3 items-start ">
+        <div class="product-image-data">
+            
+            <div class="product-image flex items-center relative overflow-hidden">
+                <img class="w-full rounded-2xl" [srcset]="dataDetails.imageCover" [alt]="dataBrandName + dataDetails.title">
+                <div #ratingStars class="productImage-layer rounded-2xl absolute start-0 end-0 
+                bottom-0 top-0 bg-black bg-opacity-25    duration-500 flex gap-2 items-center text-center justify-center
+                "> 
+                @for (star of getStars(dataDetails.ratingsAverage); track star) {
+                    <i class="fas fa-star text-yellow-500 text-3xl mx-5 "></i>
+                  }
+                </div>  
+            </div>
+
+            <div class="product-subImages flex mb-6 gap-2 justify-center my-2">
+                @for (prdouctImage of dataDetails.images; track $index) {
+                    <a role="button" (click)="showModal($index)" class="productSubImage relative overflow-hidden">
+                        <img class="w-20 h-20 rounded-2xl" [srcset]="prdouctImage" [alt]="dataDetails.title">
+                        <div class="productImage-layer rounded-2xl absolute start-0 end-0 
+                        bottom-0 top-0 bg-black bg-opacity-25 duration-500 flex gap-2 items-center text-center
+                        "> 
+                            @for (star of getStars(dataDetails.ratingsAverage); track star) {
+                                <i class="fas fa-star text-yellow-500 text-3xl mx-5 "></i>
+                            }
+                        </div>  
+                    </a>
+                }  
+            </div>
+    
+          </div>
+
+        <div class="product-content col-span-2 mt-6 md:mt-0 py-5">
+            <div class="product-header flex items-start mb-5 justify-between">
+
+                <div class="product-heading">
+
+                    <div class="product-reviewed">  
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">Reviewed: {{today | date:'fullDate' }} </p>
+                    </div>
+
+                    <h4 class="brand-header main-heading-styles "> {{dataDetails.category.name}} ({{dataBrandName}}) </h4>
+                    <h5 class="productName-header text-xl px-3 font-medium"> {{dataDetails.title}} </h5>
+
+                    <div class="product-price flex items-center py-2">
+                        <h3 class="productPrice-header text-xl px-3 font-medium"> {{dataDetails.price | currency:'GBP'}}  </h3>
+                        <span class=" font-semibold text-green-600 old-productPrice "> Discount: ({{discountNumber | currency:'GBP'}}) </span> 
+                        <span class="mx-2 line-through text-red-500"> {{dataDetails.price + discountNumber | currency:'GBP'}} </span>
+                    </div>
+   
+                </div>
+
+                <div class="product-rate ">
+                    <p class="inline-flex items-center bg-yellow-500 text-white p-2 rounded "> {{dataDetails.ratingsAverage}} </p> 
+                    <span class="gray-color"> Ratings Number: {{dataDetails.ratingsQuantity}}</span>
+                </div>
+
+            </div>
+
+            <div class="product-description mb-12">
+                <p class="mb-2 gray-color "> {{dataDetails.description}} </p>
+                <p class="mb-2 gray-color "> The flat was spotless, very comfortable, and the host was amazing. I highly recommend this accommodation for anyone visiting New York city centre. It's quite a while since we are no longer using hotel facilities but self contained places. And the main reason is poor cleanliness and staff not being trained properly. This place exceeded our expectation and will return for sure. </p>
+                <p class="mb-5 gray-color ">It is obviously not the same build quality as those very expensive watches. But that is like comparing a Citroën to a Ferrari. This product was well underrated!!! An absolute bargain.</p>
+            </div>
+
+            <aside class="flex items-center gap-5 my-6">
+                <a class="" role="button">  <span class="bg-green-500 text-white p-2 rounded"> Left {{dataDetails.quantity}} </span> </a>
+                <a class="" role="button">  <span class="bg-blue-500 text-white p-2 rounded">Sold {{dataDetails.sold}} <i class="text-red-700 fas fa-credit-card"></i></span> </a>
+            </aside>
+
+            <div class="product-order w-1/2 flex gap-5 my-10">
+                <div class="quantity-btns border-2 border-gray-500 rounded-lg w-1/4 flex items-center justify-center">
+                    <button (click)="minusProduct(detailsId)"  class="px-2 minus-btn hover:text-yellow-500 duration-500 text-xl"> <i class="fas fa-minus"></i> </button>
+                    @if (currentCount() >= 1 ) {
+                        <span   class=" px-2 product-counts text-xl"> {{currentCount()}} </span>
+                    }
+                    @else {
+                        <span   class=" px-2 product-counts text-xl"> 0 </span>
+                    }
+                    <button (click)="plusProduct(detailsId)"  class=" px-2 plus-btn hover:text-yellow-500 duration-500 text-xl"> <i class="fas fa-plus"></i> </button>
+                </div>
+
+                <button (click)="addToCart(detailsId)" class="primary-btn w-full"> Add to Cart </button>
+                <button class="w-1/4 border-2 border-gray-500 rounded-lg hover:text-red-600 duration-500"> <i class="fas fa-heart text-xl"></i> </button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="related-data-btn w-full text-center py-16">
+        <button type="button" class="primary-btn w-1/2 mx-auto hover:bg-blue-800" (click)="getRelatedProductsData(dataDetails.category.name)"> Load Related Products</button>
+    </div>
+  }
+@if (getRelatedProducts) {
+   <app-related-products [filteredProducts]="filteredProducts()"></app-related-products>
+}
+ 
+
+</div>
+
+
+
+@if(modalCarsouel) {
+    <div id="large-modal"
+        class="fixed inset-0 z-50 flex items-center justify-center  bg-black bg-opacity-50">
+        <div class="relative w-full max-w-3xl rounded-lg md:h-3/4">
+       
+                <button (click)="showModal()" type="button" class="carousel-btns-styles  start-16 z-50 hover:bg-red-500 "> <i class="fas fa-close"></i> </button>
+                    <div class="relative h-full overflow-hidden rounded-lg ">
+                        <img  [srcset]="dataDetails.images[subImageIndex]" [alt]="dataDetails.title" class="object-conver    absolute w-3/4 h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                    </div>
+       
+                    <button (click)="nextImage()" type="button" class="carousel-btns-styles hover:bg-blue-500    top-1/2 end-16"> <i class="fas fa-arrow-right"></i> </button>
+                    <button (click)="prevImage()" type="button" class="carousel-btns-styles hover:bg-blue-500    top-1/2 start-16"> <i class="fas fa-arrow-left"></i> </button>
+               
+                
+
+           
+        </div>
+    </div>
+};
+
+
+
+  

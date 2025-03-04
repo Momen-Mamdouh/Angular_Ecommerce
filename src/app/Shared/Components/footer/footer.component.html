@@ -1,0 +1,129 @@
+<footer class="black-bg relative z-40">
+    <div class="mx-auto w-full max-w-screen-xl p-4 py-4 lg:py-4">
+        <div class="md:flex md:justify-between">
+            <div class="mb-6 md:mb-0">
+                <div class="footer-headers footer-content-grid">
+                    <a routerLink="home">
+                        <img [srcset]="environmentData.darkLogo" class="w-1/8 h-20 text-start  pt-6" [alt]="environmentData.logoAlt" />
+                    </a>
+
+                    <div class="font-medium gray-color grid  items-center footer-links-grid gap-8">
+                        <h3 class="footer-heading white-color dark:light-color">Information</h3>
+                        <h3 class="footer-heading white-color dark:light-color">Service</h3>
+                    </div>
+
+                </div>
+
+                <div class="footer-content  footer-content-grid">
+                    <div class="footer-profile-data ">
+                        <ul class="footer-links">
+                            @for (profileItem of profileData; track $index) {
+                            <li class="ms-3 mt-3" [class]="profileItem.dataName">
+                                <a href="tel: {{profileItem.dataValue}}"
+                                    class=" content-center gray-color ">
+                                    <i class="w-10 h-10 "> <fa-icon [icon]=" profileItem.dataIcon"></fa-icon> </i>
+                                    <span class="font-normal hover:white-color main-duration"> {{profileItem.dataValue}} </span>
+                                </a>
+                            </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                    <div class="footer-data  content-between items-start footer-links-grid">
+
+                        <div class="info-links text-start grid gap-8 items-start ">
+                            <ul class="font-medium gray-color grid">
+                                @for (infoLink of profileInfoLinks; track $index) {
+                                <li class="mb-3">
+                                    <a [routerLink]="infoLink.routedLinkPath" class="hover:underline hover:white-color main-duration">
+                                        {{infoLink.routedLinkName}} </a>
+                                </li>
+                                }
+
+                            </ul>
+                        </div>
+
+                        <div class="service text-start grid items-start">
+                            <ul class="font-medium gray-color">
+
+                                @for (serviceLink of profileServiecLinks; track $index) {
+                                <li class="mb-3">
+                                    <a [routerLink]="serviceLink.routedLinkPath" class="hover:underline hover:white-color main-duration">
+                                        {{serviceLink.routedLinkName}} </a>
+                                </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            <div class="footer-subscription mb-6 md:mb-0 ">
+
+                <div class="footer-subscription-headers footer-subscription-contact">
+                    <h3 class=" md:pt-8 md:pb-10 footer-heading white-color dark:light-color sm:pb-2 ">Subscripe</h3>
+                </div>
+                <div class="footer-content">
+                    <label for="helper-text" class="block mb-2 text-sm font-medium white-color ">Enter
+                        Your email below </label>
+                    <div class="relative ">
+                        <div class="start-0  footer-email-icons">
+                            <i class="footer-input-icon-classes"> <fa-icon [icon]="envelopeIcon"></fa-icon> </i>
+                        </div>
+
+                        <div class="end-0 footer-email-icons">
+                            <i class="footer-input-icon-classes"> <fa-icon [icon]="arrowRtIcon"></fa-icon> </i>
+                        </div>
+                        <input type="text" id="helper-text"
+                            class=" black-bg border border-gray-color white-color text-sm rounded-lg focus:ring-gray-color focus:border-gray-color 
+                            block w-full ps-10 p-2.5 "
+                            placeholder="momenmamdouhw@gmail.com">
+                    </div>
+                    <p id="helper-text-explanation" class="mt-2 text-sm gray-color">We’ll never
+                        share your details. Read our <a routerLink="123"
+                            class="font-medium text-blue-600 hover:underline main-duration dark:text-blue-500">Privacy Policy</a>.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-1 border-gray-color sm:mx-auto  lg:my-4" />
+        <div class="footer-end sm:flex sm:items-center sm:justify-between text-center ">
+            <div class="footer-payment flex items-center gap-2 mt-4">
+                <h3 class="text-sm m-0 text-white">Payment partners</h3>
+               @for (paymentWay of payments; track $index) {
+                <img [srcset]="paymentWay.imgSrc" [alt]="paymentWay.imgAlt" class="w-8"/>
+               }
+               
+            </div>     
+            
+            <span class="footer-end-text text-sm sm:text-center gray-color">© 2023 <a routerLink="home"
+                    class="hover:underline hover:white-color main-duration">M_Fashion™</a>. All Rights Reserved.
+            </span>
+
+            <div class="social-media-icons mt-4 sm:mt-0 gap-2">
+                @for (brand of environmentData.brandIcons; track $index) {
+                    @if($index == 0){
+                        <a [href]=" brand.siteLink " class="gray-color hover:white-color main-duration">
+                            <i class="w-4 h-4 "> <fa-icon [icon]="brand.icon"></fa-icon> </i>
+                            <span class="sr-only"> {{brand.iconName}} </span>
+                        </a>
+                    }
+                    @else {
+                        <a [href]=" brand.siteLink " class="gray-color hover:white-color ms-5 main-duration">
+                            <i class="w-4 h-4"> <fa-icon [icon]="brand.icon"></fa-icon> </i>
+                            <span class="sr-only"> {{brand.iconName}} </span>
+                        </a>
+                    }
+                }          
+            </div>
+        </div>
+
+    </div>
+</footer>

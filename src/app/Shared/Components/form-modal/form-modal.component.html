@@ -1,0 +1,24 @@
+<div id="popup-modal " tabindex="-1"
+    #FormModal class=" flex backdrop-blur-sm overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 bottom-0 z-50 justify-center items-center w-full md:inset-0  max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+            <button type="button" class="" data-modal-hide="popup-modal">
+                <i (click)="closeModal()"
+                    class="absolute top-3 end-2.5 duration-500 text-gray-400 bg-transparent hover:bg-yellow-400 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <fa-icon [icon]="closeMark"></fa-icon></i>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-4 md:p-5 text-center">
+                <i
+                    class="border-2  border-yellow-900 bg-yellow-400 rounded-full p-2 mx-auto my-4 text-gray-900 w-20 h-20 dark:text-gray-200"><fa-icon
+                        [icon]="checkMark"></fa-icon>
+                </i>
+                <h3 class="my-2  text-lg font-normal text-gray-900 dark:text-gray-400"> {{headingText()}}
+                </h3>
+                <p class="mb-3 text-gray-500 ark:text-gray-200">{{subHeadingText()}} </p>
+                <button [routerLink]="roterLink()" data-modal-hide="popup-modal" type="button"
+                    class="py-2.5 px-5 ms-3 duration-500 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-yellow-400 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"> {{buttonText()}} </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+
+@if (cartProducts().length === 0 && dataResponse != "success") {
+        <app-no-products [emptyImageSrc]="emptyCartData.cardImageSrc" [emptyImageAlt]="emptyCartData.cardImageAlt"
+                         [emptyHeading]="emptyCartData.cardHeading!"    [emptyParagraph]="emptyCartData.cardText"></app-no-products> 
+}
+@else{
+
+    <div class="shopping container grid grid-cols-12 gap-6 justify-between my-16">
+    
+        <div class="shop-cart " [class]="cartData.totalCartPrice? 'col-span-8':'col-span-12'">
+    
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="border-b">
+                        <th class="text-left p-2 w-[40%] text-xl ">Products</th>
+                        <th class="text-center p-2 ">Price</th>
+                        <th class="text-center p-2 ">Quantity</th>
+                        <th class="text-center p-2 ">Subtotal</th>
+                        <th class="text-center p-2 ">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+                    @for (cartProduct of cartProducts(); track $index) {
+                        <tr class="border-b" [class]="cartProduct.product.brand.name+'-prodcut'">
+    
+                            <td class="flex items-center gap-2 p-2 product-main-data">
+                                <picture class="product-img w-1/3">
+                                    <img [srcset]="cartProduct.product.imageCover" [alt]="cartProduct.product.title" class="w-full object-cover">
+                                </picture>
+    
+                                <div class="product-content">
+                                    <p class="font-semibold text-xl"> {{cartProduct.product.title}} </p>
+                                    <p class="text-sm text-gray-600">Brand: {{cartProduct.product.brand.name}}</p>
+                                </div>
+                            </td>
+    
+                            <td class="text-center p-2 product-price text-xl"> {{cartProduct.price |currency:'GBP' }} </td>
+                            <td class="text-center p-2 product-quantity">
+                               <div class="quantity-btns border-2 border-gray-500 rounded" >
+                                    <button (click)="minusProduct(cartProduct.count, cartProduct.product.id)" class="px-2 minus-btn hover:text-yellow-500 duration-500 text-xl"> <i> <fa-icon [icon]="minusIcon"></fa-icon> </i> </button>
+                                    <span class="px-2 product-counts text-xl"> {{cartProduct.count}} </span>
+                                    <button (click)="plusProduct(cartProduct.count, cartProduct.product.id)" class="px-2 plus-btn hover:text-yellow-500 duration-500 text-xl"> <i> <fa-icon [icon]="plusIcon"></fa-icon> </i> </button>
+                               </div>
+                            </td>
+                            <td class="text-center p-2 text-xl"> {{cartProduct.price * cartProduct.count | currency:'GBP'}}  </td>
+                            <td class="text-center p-2 text-red-500 cursor-pointer"> <i (click)="removeSpecficProduct(cartProduct.product.id)" (click)="getLoggedUserCartData()" class="cursor-pointer pe-4 text-red-700 hover:text-red-500 duration-500"> 
+                                <fa-icon [icon]="deleteIcon" size="2x"></fa-icon> </i>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+    
+                
+        
+            </table>
+    
+        
+            <div class="table-footer flex justify-between items-center w-full m-5 font-mono">
+                <div class="p-2 text-xl">
+                        <span class="me-3">Total Price:  </span>
+                        <span class="text-red-600"> {{cartData.totalCartPrice | currency:'GBP' }} </span>
+                </div>
+                <div>
+                    <button (click)="clearCart()" class="me-5 p-2 px-5 rounded plus-btn bg-yellow-300 text-white hover:bg-yellow-400 duration-500 text-xl"> Clear </button>
+    
+                </div>
+            </div>
+            
+        </div>
+    
+       @if (cartData.totalCartPrice) {
+            <div class="payment-list col-span-4">
+                <app-payment-list [cartData]="cartData" [deliveryCharge]="deliveryCharge">
+                    <button [routerLink]="['/checkOut', cartData._id]" type="submit" class="checkOutBtn primary-btn">Procced To CheckOut</button>
+                </app-payment-list>
+            </div>
+       }
+    </div>
+}

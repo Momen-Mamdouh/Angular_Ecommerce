@@ -1,0 +1,18 @@
+
+<div class="brands-slider w-full  mx-auto  overflow-hidden md:w-3/4  my-16 fade-in " [class.loaded]="isLoaded" [@fadeIn] >
+    <h2 class="brands-heading main-text-color main-heading-styles "> Our Brands </h2>
+    <swiper-container [@fadeIn] class="mySwiper w-full h-full bg-gradient-to-r from-gray-100 via-gray-300 to-black-500" [loop]="true"  slides-per-view="3"
+    grid-rows="1"   space-between="0"
+     autoplay-delay="2000" autoplay-disable-on-interaction="false">
+
+    @for (brands of brandsData; track $index) {
+        <swiper-slide>
+            <div class="w-1/2 h-1/2 mx-auto">
+                <img class=" object-cover" [srcset]="brands.image" [alt]="brands.slug">
+            </div>
+        </swiper-slide>
+    }
+        
+    </swiper-container>
+
+</div>

@@ -1,0 +1,6 @@
+<button [disabled]="isLoading()" [disabled]="form.invalid" type="submit" class="main-auth-btn w-full"> {{btnText()}} </button>
+@if (errorMessage()) {
+    <div class="p-4 my-4 text-sm text-white rounded-lg bg-red-600 dark:bg-gray-800 dark:text-red-400 " role="alert">
+        <span class="font-medium">!!! {{errorMessage()}} </span>
+    </div>
+}

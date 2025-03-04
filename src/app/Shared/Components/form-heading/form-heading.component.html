@@ -1,0 +1,9 @@
+@if(notLogin()){
+    <div class="backBtn mb-5">
+        <a href=""> <i class="fas fa-chevron-left"></i> Back </a>
+    </div>
+}
+
+<h1 class="font-bold text-2xl mb-3 dark:text-gray-900"> {{headingText()}} </h1>
+<p class="ps-3 font-semibold text-base text-gray-700"> {{subHeadingText()}}  </p>
+<ng-container select=".paymentIcons"></ng-container>

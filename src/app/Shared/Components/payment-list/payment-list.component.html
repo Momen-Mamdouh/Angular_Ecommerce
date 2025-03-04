@@ -1,0 +1,29 @@
+<div class="payment-card max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+
+    <div class="subTotal-price flex items-center justify-between border-b-2 border-b-gray-200 p-4 mb-2">
+        <h5 class="  text-2xl font-bold tracking-tight text-gray-900 dark:text-white">SubTotal Price: </h5>
+        <span class=" text-xl font-bold tracking-tight text-red-600 dark:text-white"> {{cartData().totalCartPrice | currency:'GBP' }} </span>
+    </div>
+
+    <div class="discount-section">
+        <label for="discount-apply" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Enter Discount Code</label>
+        <div class="relative">
+            <input type="text" id="discount-apply" class="block w-full p-3 m-2  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Discount Code"  />
+            <button type="submit" class="absolute end-0 bottom-[0.15rem] btn-styles primary-btn">Apply</button>
+        </div>
+    </div>
+
+    <div class="delivery-section text-center flex items-end justify-between border-b-2 border-b-gray-200 p-2 mb-1">
+        <span class="  text-lg font-semibold tracking-tight text-gray-900 dark:text-white">Delivery Charge: </span>
+        <span class=" text-base font-semibold tracking-tight text-red-600 dark:text-white text-end"> {{deliveryCharge() | currency:'GBP' }} </span>
+    </div>
+
+    <div class="total-payment">
+        <div class="total-price-section text-center flex items-end justify-between p-2 mb-1">
+            <span class="  text-lg font-semibold tracking-tight text-gray-900 dark:text-white">Grand Total: </span>
+            <span class=" text-base font-semibold tracking-tight text-red-600 dark:text-white text-end"> {{cartData().totalCartPrice + deliveryCharge() | currency:'GBP' }} </span>
+        </div>
+        <ng-content select=".checkOutBtn"></ng-content> 
+    </div>
+    
+</div>

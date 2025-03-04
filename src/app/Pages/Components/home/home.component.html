@@ -1,0 +1,20 @@
+
+<app-home-slider></app-home-slider>
+<app-categories-slider></app-categories-slider>
+
+<div class="container py-16">
+    <h3 class="text-center main-text-color main-heading-styles">Our Bestseller</h3>
+    <app-products [startSlicing]=0 [endSlicing]="12"></app-products>
+</div>
+
+
+
+@defer (on viewport) {
+    <app-brands-slider></app-brands-slider>
+    }
+    @placeholder {
+    <div class="brands-loader-gif w-full bg-black">
+        <img src="Images/loader-gif.gif" />
+    </div>
+    }
+    

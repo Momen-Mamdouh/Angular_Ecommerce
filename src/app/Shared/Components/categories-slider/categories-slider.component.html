@@ -1,0 +1,24 @@
+<div class="container">
+    
+    <div class="categories-slider w-full  my-20   ">
+        <h2 class="categories-heading main-text-color main-heading-styles hover:text-yellow-500 duration-500 " role="button" routerLink="/shop"> Shop Categories </h2>
+        <div class="categories flex gap-2 flex-col md:flex-row ">
+            @for (categoryCard of categoryCards; track $index) {
+                <div class="category-card relative   overflow-hidden  max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                    <a [routerLink]="categoryCard.cardRouterLink" >
+                        <img class="rounded-t-lg" [srcset]="categoryCard.cardImageSrc" [alt]="categoryCard.cardImageAlt" />
+                    </a>
+                    <div class="absolute category-btn translate-y-6 flex justify-center items-center w-full">
+
+                        <a [routerLink]="categoryCard.cardRouterLink" role="button" class="primary-btn w-full rounded-lg">
+                            {{categoryCard.cardText}}
+                        </a>   
+    
+                    </div>
+                </div>
+        }
+        </div>
+    </div>
+
+
+</div>

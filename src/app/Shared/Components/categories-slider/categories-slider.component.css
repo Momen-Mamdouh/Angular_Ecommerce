@@ -1,0 +1,17 @@
+.category-card .category-btn {
+  opacity: 0;
+}
+.category-card:hover .category-btn {
+  opacity: 1;
+  z-index: 9;
+  transform: translate(0, -90%);
+  -webkit-transform: translate(0, -90%);
+  -moz-transform: translate(0, -90%);
+  -ms-transform: translate(0, -90%);
+  -o-transform: translate(0, -90%);
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+}/*# sourceMappingURL=categories-slider.component.css.map */

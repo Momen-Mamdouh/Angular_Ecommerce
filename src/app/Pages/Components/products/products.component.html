@@ -1,0 +1,103 @@
+<div class="products-container ">
+    <!-- ^^ Search Input -->
+    @if (products.length != 0) {
+        <div class="search-input-container my-10 sm:mx-auto sm:w-1/2 md:w-1/4  md:mx-0">
+            <label for="search" class="main-text-color mb-2 text-sm font-medium  sr-only ">Search</label>
+            <div class="relative search-input">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <i class="w-4 text-gray-500 dark:text-gray-400"> <i class="fas fa-search"></i> </i>
+                </div>
+                <input type="search" id="search"
+                    class="main-text-color text-base block w-full main-input"
+                    placeholder="Search" required [(ngModel)]="searchItem" />
+             
+            </div>
+        </div>
+    }
+     
+        <div class="products ">
+            @if (products.length == 0){
+                <app-no-products [emptyImageSrc]="noProductsData.cardImageSrc" [emptyImageAlt]="noProductsData.cardImageAlt"
+                [emptyHeading]="noProductsData.cardHeading!"    [emptyParagraph]="noProductsData.cardText"></app-no-products> 
+            }  
+
+            @if (filteredProducts().length == 0){ 
+             <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 sm:justify-center" >
+                <!-- ^^ Search Input -->
+                @for (product of products.slice(startSlicing(), endSlicing()) | search : searchItem.toUpperCase() ; track product._id) {
+                    <div class="card main-card">
+
+                        <div class="card-img" [routerLink]="['/details', product._id ]">
+                                <img class="main-card-img" [srcset]="product.imageCover"
+                                    [alt]="product.title" />
+                        </div>
+
+                        <div class="card-header ps-2 pe-1 pb-5" [routerLink]="['/details', product._id ]">
+                                <h5 class="text-md font-semibold main-card-header-text">
+                                    {{product.category.name}} </h5>
+                                <h3 class="text-xl font-medium main-card-header-text ">
+                                    {{product.title.split(' ', 2).join(' ')}} </h3>
+                            <div class="card-body flex items-center justify-between  mt-2.5 mb-5">
+            
+                                <div class="flex items-center  space-x-1 rtl:space-x-reverse">
+                                    <i class="w-4 h-4 text-yellow-400"> <i class="fas fa-star"></i> </i>
+                                    <i class="w-4 h-4 text-gray-200 dark:white-color"> <i class="fas fa-star-half-empty"></i> </i>
+                                    <span class="text-xs font-semibold px-2.5 py-0.5 ms-3 rounded-sm main-text-color bg-yellow-400">
+                                        {{product.ratingsAverage}} </span>
+                                </div>
+            
+                                <span class="text-3xl font-bold main-text-color"> {{product.price | currency:'GBP'}}  </span>
+                            </div>
+            
+            
+                        </div>
+
+                        <button (click)="addToCart(product._id)" class="w-1/2  primary-btn">Add to cart</button>
+                        <button (click)="addToWishLsit(product._id)" class="w-1/2 primary-btn hover:bg-red-500">Add to WishList</button>
+
+                    </div>
+                }
+            </div> 
+            }
+      
+            @else if (filteredProducts()) {
+                <div class="products-grid" >
+                    @for (product of filteredProducts() | search : searchItem.toUpperCase() ; track product._id) {
+                        <div class="card main-card">
+            
+                            <div class="card-img" [routerLink]="['/details', product._id ]">
+                                    <img class="main-card-img" [srcset]="product.imageCover"
+                                        [alt]="product.title" />
+                            </div>
+            
+                            <div class="card-header ps-2 pe-1 pb-5" [routerLink]="['/details', product._id ]">
+                                    <h5 class="text-md font-semibold main-card-header-text">
+                                        {{product.category.name}} </h5>
+                                    <h3 class="text-xl font-medium main-card-header-text ">
+                                        {{product.title.split(' ', 2).join(' ')}} </h3>
+                                <div class="card-body flex items-center justify-between  mt-2.5 mb-5">
+                
+                                    <div class="flex items-center  space-x-1 rtl:space-x-reverse">
+                                        <i class="w-4 h-4 text-yellow-400"> <i class="fas fa-star"></i>  </i>
+                                        <i class="w-4 h-4 text-gray-200 dark:white-color"> <i class="fas fa-star-half-empty"></i>  </i>
+                                        <span class="text-xs font-semibold px-2.5 py-0.5 ms-3 rounded-sm main-text-color bg-yellow-400">
+                                            {{product.ratingsAverage}} </span>
+                                    </div>
+                
+                                    <span class="text-3xl font-bold main-text-color"> {{product.price | currency:'GBP'}}  </span>
+                                </div>
+                
+                
+                            </div>
+            
+                            <button (click)="addToCart(product._id)" class="w-1/2  primary-btn">Add to cart</button>
+                            <button (click)="addToWishLsit(product._id)" class="w-1/2 primary-btn hover:bg-red-500">Add to WishList</button>
+                            
+                        </div>
+                    }
+                </div>
+            }
+           
+    
+        </div>
+</div>

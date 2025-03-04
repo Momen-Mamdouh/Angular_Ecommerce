@@ -1,0 +1,6 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  min-height: 100vh;
+  flex-direction: column;
+}/*# sourceMappingURL=main-lay-out.component.css.map */

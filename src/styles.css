@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+  .white-color {
+    @apply text-white;
+  }
+  .black-color {
+    @apply text-gray-900;
+  }
+  .gray-color {
+    @apply text-gray-500;
+  }
+  .white-bg {
+    @apply bg-gray-100;
+  }
+  .black-bg {
+    @apply bg-gray-900;
+  }
+  .gray-bg {
+    @apply bg-gray-500;
+  }
+  .yellow-bg {
+    @apply bg-yellow-500;
+  }
+  .blue-bg {
+    @apply bg-blue-700;
+  }
+  .form-bg {
+    @apply bg-yellow-700/20;
+  }
+  .yellow-ring {
+    @apply ring-yellow-500;
+  }
+  .blue-ring {
+    @apply ring-blue-700;
+  }
+  .main-text-color {
+    @apply black-color dark:white-color;
+  }
+  .main-heading-styles {
+    @apply main-text-color text-3xl font-semibold  p-3;
+  }
+  .main-bg-color {
+    @apply black-bg dark:white-bg hover:yellow-bg;
+  }
+  .main-placeholder {
+    @apply placeholder-slate-700 placeholder:gray-color dark:placeholder-gray-200;
+  }
+  .main-bg {
+    background-color: #F3F2F3;
+  }
+  .main-btn-text-color {
+    @apply white-color  dark:black-color;
+  }
+  .main-btn-style {
+    @apply px-5 py-2.5 font-medium text-sm text-center rounded-lg disabled:bg-red-950 disabled:cursor-not-allowed
+            focus:outline-none;
+  }
+  .main-input-bg-color {
+    @apply white-bg dark:gray-bg;
+  }
+  .main-input-border {
+    @apply focus:border-gray-300 border-gray-300 dark:border-gray-600 
+         dark:focus:border-gray-800;
+  }
+  .main-ring {
+    @apply focus:ring-4 focus:yellow-ring dark:focus:ring-gray-800;
+  }
+  .main-duration {
+    @apply duration-1000;
+  }
+  .half-main-duration {
+    @apply duration-500;
+  }
+  .main-input {
+    @apply outline-none rounded-lg p-4 ps-10 main-text-color main-placeholder main-input-bg-color 
+         main-input-border  half-main-duration main-ring;
+  }
+  .main-auth-input {
+    @apply focus:blue-ring;
+  }
+  .main-auth-label {
+    @apply block mb-2 text-base font-normal black-color dark:black-color;
+  }
+  .main-input-padding {
+    @apply pb-3;
+  }
+  .main-btn {
+    @apply main-btn-style main-btn-text-color main-ring  main-bg-color main-duration  dark:black-color  dark:hover:white-color;
+  }
+  .main-auth-btn {
+    @apply main-btn-style main-btn-text-color white-color main-bg-color duration-500  focus:ring-4 focus:ring-blue-300  
+            md:w-full sm:w-auto hover:blue-bg disabled:hover:bg-red-950;
+  }
+  .primary-btn {
+    @apply main-btn-style main-btn-text-color main-bg-color main-duration focus:ring-0 black-bg;
+  }
+  .main-card {
+    @apply overflow-hidden w-full max-w-sm white-bg border rounded-lg shadow-sm dark:gray-bg dark:border-gray-800;
+  }
+  .main-card-img {
+    @apply w-full  object-contain  rounded-t-lg;
+  }
+  .main-card-header-text {
+    @apply tracking-tight black-color dark:white-color;
+  }
+  .main-icon {
+    @apply w-4 h-4;
+  }
+  .main-icon-style {
+    @apply main-icon gray-color transition duration-500 dark:text-gray-400 group-hover:black-color dark:group-hover:white-color;
+  }
+  .navbar-anchors {
+    @apply block py-2 px-3 black-color hover:gray-color dark:white-color dark:hover:white-color main-duration;
+  }
+  .activeLink {
+    @apply rounded md:px-2 md:py-1 white-bg black-color  hover:white-color hover:yellow-bg  dark:black-bg dark:white-color;
+  }
+  .mainSideNavBarLink {
+    @apply flex items-center p-2 black-color rounded-lg dark:white-color hover:bg-gray-100 dark:hover:bg-gray-700;
+  }
+  .border-gray-color {
+    @apply border-gray-200;
+  }
+  .products-grid {
+    @apply grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 sm:justify-center;
+  }
+  .carousel-btns-styles {
+    @apply absolute black-color text-2xl bg-opacity-75 bg-gray-200  rounded-lg p-1 hover:white-color duration-500;
+  }
+  .addressCard-heading {
+    @apply mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white;
+  }
+  .addressCard-subHeading {
+    @apply font-medium text-lg text-gray-700 dark:text-gray-200;
+  }
+}
+.footer-links-grid {
+  @apply grid grid-cols-2 md:gap-16  sm:gap-12;
+}
+
+.footer-content-grid {
+  @apply grid grid-cols-2 md:gap-16   sm:gap-12;
+}
+
+.footer-email-icons {
+  @apply absolute inset-y-0  flex items-center ps-3.5 pointer-events-none pe-2;
+}
+
+.footer-input-icon-classes {
+  @apply w-4 h-4 text-gray-400  dark:gray-color;
+}
+
+.my-scrollbar::-webkit-scrollbar {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.my-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.my-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(31, 41, 55);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}/*# sourceMappingURL=styles.css.map */

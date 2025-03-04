@@ -1,0 +1,10 @@
+@use "../../../../_variables.scss" as Var;
+
+.meagMenu-subLinks{
+    @apply w-full px-4 py-3
+}
+.my-scrollbar::-webkit-scrollbar-thumb{
+    background-color:rgb(234 179 8);
+}
+
+

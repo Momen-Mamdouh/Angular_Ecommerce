@@ -1,0 +1,12 @@
+.fade-in {
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+  -webkit-transition: opacity 1000ms ease-in-out;
+  -moz-transition: opacity 1500ms ease-in-out;
+  -ms-transition: opacity 1000ms ease-in-out;
+  -o-transition: opacity 1000ms ease-in-out;
+}
+
+.fade-in.loaded {
+  opacity: 1;
+}/*# sourceMappingURL=brands-slider.component.css.map */
