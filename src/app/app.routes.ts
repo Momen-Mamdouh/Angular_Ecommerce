@@ -79,7 +79,6 @@ export const routes: Routes = [
             (m) => m.DetailsComponent
           ),
         title: 'Details',
-        data: { renderMode: 'ssr' },
       },
       {
         path: 'checkOut/:cartId',
@@ -120,7 +119,6 @@ export const routes: Routes = [
             (m) => m.ShopComponent
           ),
         title: 'Shop',
-        data: { renderMode: 'ssr' },
       },
       {
         path: 'cart',

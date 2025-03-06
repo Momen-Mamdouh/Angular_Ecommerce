@@ -15,21 +15,6 @@ const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 /**
- * Define getPrerenderParams for dynamic routes.
- * This function provides the possible values for route parameters during the build process.
- */
-export function getPrerenderParams(): { [route: string]: { [param: string]: string[] } } {
-  return {
-    '/details/:id': {
-      id: ['1', '2', '3'], // Replace with actual IDs from your backend or database
-    },
-    '/shop/:shopCategory': {
-      shopCategory: ["Men'Fashion", "Women's Fashion", "Foot's Fashion", "Kid's Fashio"], // Replace with actual categories
-    },
-  };
-}
-
-/**
  * Example Express Rest API endpoints can be defined here.
  * Uncomment and define endpoints as necessary.
  *
@@ -51,27 +36,6 @@ app.use(
     redirect: false,
   }),
 );
-
-/**
- * Handle dynamic routes for prerendering.
- */
-app.get('/details/:id', (req, res, next) => {
-  angularApp
-    .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
-    .catch(next);
-});
-
-app.get('/shop/:shopCategory', (req, res, next) => {
-  angularApp
-    .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
-    .catch(next);
-});
 
 /**
  * Handle all other requests by rendering the Angular application.
